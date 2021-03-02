@@ -35,10 +35,6 @@ web site</a>:
 
 ## Loading the data
 
-
-
-
-
 When loading the dataset into R, please consider the following:
 
 * The dataset has 2,075,259 rows and 9 columns. First
@@ -91,8 +87,20 @@ date. There should be four PNG files and four R code files.
 
 The four plots that you will need to construct are shown below. 
 
+## Running the scripts
+
+Running the scripts will be by simply sourcing the files in R.
+
+#### Prerequistes
+
+- R must be installed
+- Several libraries should be installed with dependencies as needed:
+  - ```packages.install("RCurl)```
+  - ```packages.install("sqldf)```
 
 ### Plot 1
+
+```source("plot1.R")```
 
 
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
