@@ -10,24 +10,29 @@
 #' "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 #' @param output_file The name of the file to output the graph to.
 #' @examples
-#' > make_plot1(data_dir = "data", data_zip_url = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip", output_file = "plot1.png")
+#' > make_plot3(data_dir = "data", data_zip_url = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip", output_file = "plot3.png")
 #'
 #' @export
-make_plot2 <- function(
+make_plot3 <- function(
   data_dir = "data", 
   data_zip_url = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip",
-  output_file = "plot2.png"
+  output_file = "plot3.png"
 ) {
   source("downloader.R")
   
-  plot2_df <- read_expand_format_dataframe(data_dir = data_dir, data_zip_url = data_zip_url)
+  plot3_df <- read_expand_format_dataframe(data_dir = data_dir, data_zip_url = data_zip_url)
   
   ## STEP 2, CREATE DEVICE, MAKE THE PLOT AND CLOSE
   
   png(file = output_file, width = 480, height = 480)
-  plot(plot2_df$Global_active_power~plot2_df$Datetime3, type="l", ylab = "Global Active Power (kilowatts)", xlab = "")
+
+  plot(plot3_df$Sub_metering_1~plot3_df$Datetime3, type="l", ylab = "Energy sub metering", xlab = "")
+  lines(plot3_df$Sub_metering_2~plot3_df$Datetime3, col = "red")
+  lines(plot3_df$Sub_metering_3~plot3_df$Datetime3, col = "blue")
+  legend("topright", legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), col=c("black", "red", "blue"), lty = 1, cex=0.9)
+  
   dev.off()
   closeAllConnections()
 }
 
-make_plot2()
+make_plot3()
