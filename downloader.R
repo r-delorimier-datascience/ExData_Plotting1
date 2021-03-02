@@ -25,20 +25,22 @@ read_expand_format_dataframe <- function(
   
   ## STEP 1A, CREATE LOCATION AND DOWNLOAD THE FILE
   
-  if(!file.exists(data_dir)) {
-    dir.create(data_dir)
-  }
-  zip_file = paste(data_dir, "dataset.zip", sep = "/")
-  download.file(data_zip_url, destfile=zip_file, method="curl")
+#  if(!file.exists(data_dir)) {
+#    dir.create(data_dir)
+#  }
+#  zip_file = paste(data_dir, "dataset.zip", sep = "/")
+#  download.file(data_zip_url, destfile=zip_file, method="curl")
   
   ## STEP 1B, UNZIP THE FILE
   
-  unzip(zipfile=zip_file, exdir=data_dir)
+#  unzip(zipfile=zip_file, exdir=data_dir)
   
   ## STEP 2, CREATE DATAFRAME FILTERED BY DATES 2007-02-01 and 2007-02-02 AND FORMAT
   
   plot1_df <- read.csv.sql("data/household_power_consumption.txt", "select * from file where (Date = '1/2/2007' or Date = '2/2/2007') and Global_active_power <> '?' ", sep=";")
   plot1_df$Date <- as.Date(plot1_df$Date , format = "%d/%m/%y")
   plot1_df$Time <- strptime(plot1_df$Time , format = "%H:%M:%S")
+  plot1_df$Datetime <- strptime(paste(plot1_df$Date, plot1_df$Time, sep = " ") , format = "%e/%m/%Y %H:%M:%S")
+  plot1_df$Datetime2 <- paste(plot1_df$Date, plot1_df$Time, sep = " ") 
   return(plot1_df)
 }
