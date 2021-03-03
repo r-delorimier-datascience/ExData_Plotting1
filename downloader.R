@@ -26,7 +26,6 @@ read_expand_format_dataframe <- function(
       install.packages(package)
     }
   }
-#  install.packages(setdiff(packages, rownames(installed.packages())))
   ## LIBRARIES
   library(RCurl)
   library(sqldf)
@@ -35,14 +34,14 @@ read_expand_format_dataframe <- function(
   
   if(!file.exists(data_dir)) {
     dir.create(data_dir)
+    zip_file = paste(data_dir, "dataset.zip", sep = "/")
+    download.file(data_zip_url, destfile=zip_file, method="curl")
+    
+    ## STEP 1B, UNZIP THE FILE
+    
+    unzip(zipfile=zip_file, exdir=data_dir)
   }
-  zip_file = paste(data_dir, "dataset.zip", sep = "/")
-  download.file(data_zip_url, destfile=zip_file, method="curl")
-  
-  ## STEP 1B, UNZIP THE FILE
-  
-  unzip(zipfile=zip_file, exdir=data_dir)
-  
+
   ## STEP 2, CREATE DATAFRAME FILTERED BY DATES 2007-02-01 and 2007-02-02 AND FORMAT
   
   plot1_df <- read.csv.sql("data/household_power_consumption.txt", "select * from file where (Date = '1/2/2007' or Date = '2/2/2007') and Global_active_power <> '?' ", sep=";")

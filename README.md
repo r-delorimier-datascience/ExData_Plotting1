@@ -108,15 +108,21 @@ Running the scripts will be by simply sourcing the files in R.
 
 ### Plot 2
 
+```source("plot2.R")```
+
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
 
 
 ### Plot 3
 
+```source("plot3.R")```
+
 ![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
 
 
 ### Plot 4
+
+```source("plot4.R")```
 
 ![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
 
